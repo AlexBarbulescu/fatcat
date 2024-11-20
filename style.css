@@ -17535,7 +17535,7 @@ body:not(.is-expanded-menu):not(.primary-menu-open) .semi-transparent.transparen
   display: flex;
 }
 #logo img {
-  /* height: 75px !important; */
+  height: 80px !important;
   display: block;
   max-width: 100%;
   max-height: 100%;
@@ -17560,6 +17560,18 @@ body:not(.is-expanded-menu):not(.primary-menu-open) .semi-transparent.transparen
 }
 .is-expanded-menu #header.sticky-header-shrink #header-wrap #logo img {
   height: var(--cnvs-sticky-header-height);
+}
+
+@media (max-width: 768px) {
+  #logo img {
+    height: 60px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  #logo img {
+    height: 50px !important;
+  }
 }
 
 /* ----------------------------------------------------------------
@@ -20070,7 +20082,7 @@ body:not(.has-plugin-html5video) .video-wrap video {
 #slider .container {
   position: absolute;
   bottom: 0 !important;
-  height: 30% !important;
+  height: 50% !important;
   left: 0;
   right: 0;
 }
@@ -20085,17 +20097,12 @@ body:not(.has-plugin-html5video) .video-wrap video {
 
 @media only screen and (min-width: 769px) and (max-width: 1239px) {
   #slider .container {
-    height: 40%;
+    height: 45% !important;
   }
 }
 
 
 @media (max-width: 767px) {
-  #slider .container {
-    height: auto !important; 
-    position: static; 
-  }
-
   .center-rows {
     display: flex;
     flex-direction: column;
@@ -20103,6 +20110,14 @@ body:not(.has-plugin-html5video) .video-wrap video {
     align-items: center;
     min-height: 100vh;
   }
+}
+
+@media (max-width: 576px) {
+  #slider .container {
+    /* height: auto !important;  */
+    height: 38% !important;
+  }
+
 }
 
 .slider-caption,
@@ -20177,9 +20192,6 @@ body:not(.has-plugin-html5video) .video-wrap video {
   margin-bottom: 0.75rem;
   font-size: var(--cnvs-slider-caption-p-size);
 }
-
-
-
 
 @media (max-width: 767.98px) {
   .slider-caption p {
@@ -33788,4 +33800,16 @@ body.dark {
   left: 0;
   opacity: 0.7;
   pointer-events: none; /* Allow clicks to pass through the canvas */
+}
+
+.background1{
+  background: url('img/bg1.jpg') center center no-repeat; 
+  background-size: cover; 
+  z-index: 0;
+}
+
+.background2{
+  background: url('img/bg2.jpg') center center no-repeat; 
+  background-size: cover; 
+  z-index: 0;
 }
