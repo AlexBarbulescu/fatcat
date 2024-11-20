@@ -7,6 +7,11 @@ $(document).ready(function () {
   let interval = null;
   let isRaining = true;
 
+  // Detect if the device is mobile based on screen width
+  const isMobile = window.innerWidth <= 768; // Change this threshold if needed
+  const numMoney = isMobile ? 50 : 150; // If mobile, set numMoney to 50, otherwise to 150
+  const imageScale = isMobile ? 0.5 : 1; // If mobile, scale image to 50%
+
   // Start rain on page load
   const canvas = $('<canvas class="rain"></canvas>');
   canvas.attr('width', width);
@@ -29,7 +34,6 @@ $(document).ready(function () {
   });
 
   function initAnimation(canvas) {
-    const numMoney = 150;
     const speedOffset = 10;
     const speedRange = 5;
     const numImages = 6;
@@ -53,21 +57,20 @@ $(document).ready(function () {
       };
 
       const imageIndex = _.random(numImages);
-      // money.image.src = 'https://images.vexels.com/media/users/3/144032/isolated/preview/1f5414b9d04b71a4972208c035a7d278-stroke-dollar-bill-by-vexels.png';
-      money.image.src = 'img/money.png';
+      money.image.src = 'img/money.png'; // Use your actual image path here
       fallingMoney.push(money);
     });
 
     interval = setInterval(function () {
-      draw();
+      draw(imageScale); // Pass the image scale to the draw function
     }, frameRate);
   }
 
-  function draw() {
+  function draw(imageScale) {
     clearWindow();
 
     fallingMoney.forEach(function (money, index) {
-      drawRotatedImage(money);
+      drawRotatedImage(money, imageScale);
 
       money.currentFrame += 1;
       money.y += money.speed;
@@ -87,11 +90,12 @@ $(document).ready(function () {
     canvasContext.clearRect(0, 0, width, height);
   }
 
-  function drawRotatedImage(money) {
+  function drawRotatedImage(money, imageScale) {
     canvasContext.save();
     canvasContext.translate(money.x, money.y);
     canvasContext.rotate(money.angle);
-    canvasContext.drawImage(money.image, 0, 0, 100, 100 * money.image.height / money.image.width);
+    // Adjust the image size based on the imageScale (for mobile)
+    canvasContext.drawImage(money.image, 0, 0, 100 * imageScale, 100 * imageScale * money.image.height / money.image.width);
     canvasContext.restore();
   }
 
