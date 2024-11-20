@@ -20115,7 +20115,7 @@ body:not(.has-plugin-html5video) .video-wrap video {
 @media (max-width: 576px) {
   #slider .container {
     /* height: auto !important;  */
-    height: 38% !important;
+    height: 41% !important;
   }
 
 }
