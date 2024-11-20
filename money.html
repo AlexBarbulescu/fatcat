@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Rain Money</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100vh;
+      z-index: 10; /* Bring the button to the front */
+      position: relative;
+    }
+
+    .rain {
+      z-index: 5; /* Place the rain animation behind the button */
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 0.7;
+      pointer-events: none; /* Allow clicks to pass through the canvas */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="btn btn-primary toggle-rain">Stop Rain</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      let width = $(document).width();
+      let height = $(document).height();
+      const imageHeight = 100;
+      let fallingMoney = [];
+      let canvasContext = null;
+      let interval = null;
+      let isRaining = true;
+
+      // Start rain on page load
+      const canvas = $('<canvas class="rain"></canvas>');
+      canvas.attr('width', width);
+      canvas.attr('height', height);
+      canvas.appendTo('body');
+      initAnimation(canvas[0]);
+
+      // Toggle rain with the button
+      $('.toggle-rain').on('click', function () {
+        if (isRaining) {
+          endAnimation(canvas[0]);
+          $(this).text('Start Rain');
+        } else {
+          initAnimation(canvas[0]);
+          $(this).text('Stop Rain');
+        }
+        isRaining = !isRaining;
+      });
+
+      function initAnimation(canvas) {
+        const numMoney = 300;
+        const speedOffset = 10;
+        const speedRange = 5;
+        const numImages = 6;
+        const frameRate = 1000 / 30; // 30 frames per second
+
+        canvasContext = canvas.getContext('2d');
+        fallingMoney = [];
+
+        _.range(numMoney).forEach(function (index) {
+          const isOdd = index % 2 === 1;
+          const direction = isOdd ? 1 : -1;
+
+          const money = {
+            image: new Image(),
+            x: _.random(width),
+            y: _.random(-height, -imageHeight),
+            angle: _.random(2 * Math.PI),
+            speed: speedOffset + _.random(speedRange),
+            currentFrame: 0,
+            direction: direction,
+          };
+
+          const imageIndex = _.random(numImages);
+          money.image.src = 'https://images.vexels.com/media/users/3/144032/isolated/preview/1f5414b9d04b71a4972208c035a7d278-stroke-dollar-bill-by-vexels.png';
+          fallingMoney.push(money);
+        });
+
+        interval = setInterval(function () {
+          draw();
+        }, frameRate);
+      }
+
+      function draw() {
+        clearWindow();
+
+        fallingMoney.forEach(function (money, index) {
+          drawRotatedImage(money);
+
+          money.currentFrame += 1;
+          money.y += money.speed;
+          money.angle += money.direction * 0.1;
+          const radius = money.direction * (10 + (index % 6));
+          money.x += Math.sin((money.currentFrame + index) / (2 * Math.PI)) * radius;
+
+          // Reset money position when it falls out of view
+          if (money.y > height) {
+            money.y = _.random(-height, -imageHeight);
+            money.x = _.random(width);
+          }
+        });
+      }
+
+      function clearWindow() {
+        canvasContext.clearRect(0, 0, width, height);
+      }
+
+      function drawRotatedImage(money) {
+        canvasContext.save();
+        canvasContext.translate(money.x, money.y);
+        canvasContext.rotate(money.angle);
+        canvasContext.drawImage(money.image, 0, 0, 100, 100 * money.image.height / money.image.width);
+        canvasContext.restore();
+      }
+
+      function endAnimation(canvas) {
+        clearInterval(interval);
+        canvasContext.clearRect(0, 0, width, height);
+      }
+    });
+  </script>
+</body>
+</html>

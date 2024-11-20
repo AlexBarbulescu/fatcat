@@ -92,17 +92,17 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
   --bs-body-color-rgb: 33, 37, 41;
-  --bs-body-bg: #fff;
+  --bs-body-bg: #e9c739;
   --bs-body-bg-rgb: 255, 255, 255;
   --bs-emphasis-color: #000;
   --bs-emphasis-color-rgb: 0, 0, 0;
   --bs-secondary-color: rgba(33, 37, 41, 0.75);
   --bs-secondary-color-rgb: 33, 37, 41;
-  --bs-secondary-bg: #e9ecef;
+  --bs-secondary-bg: #e9c739;
   --bs-secondary-bg-rgb: 233, 236, 239;
   --bs-tertiary-color: rgba(33, 37, 41, 0.5);
   --bs-tertiary-color-rgb: 33, 37, 41;
-  --bs-tertiary-bg: #f8f9fa;
+  --bs-tertiary-bg: #e9c739;
   --bs-tertiary-bg-rgb: 248, 249, 250;
   --bs-heading-color: inherit;
   --bs-link-color: #0d6efd;
@@ -13350,7 +13350,8 @@ textarea.form-control-lg {
   --bs-link-hover-color:	var(--cnvs-heading-color);
   --cnvs-white:	#fff;
   --cnvs-black:	#000;
-  --cnvs-body-bg:	var(--bs-body-bg);
+  /* --cnvs-body-bg:	var(--bs-body-bg); */
+  --cnvs-body-bg:	#e9c739;
   --cnvs-body-bg-boxed:	var(--cnvs-contrast-0);
   --cnvs-headings-font-weight:	600;
   /* Font Families */
@@ -23004,6 +23005,10 @@ td.actions {
   --cnvs-btn-color: var(--cnvs-btn-color-light);
   color: var(--cnvs-btn-color-dark);
 }
+.button.button-mustard {
+  --cnvs-btn-color: #e9c739;
+  color: var(--cnvs-btn-color-dark);
+}
 .button:hover {
   background-color: var(--bs-black);
   color: #fff;
@@ -26831,7 +26836,7 @@ td.actions {
   animation-name: reveal;
   animation-duration: 2s;
   animation-timing-function: ease;
-  background-color: #fff;
+  background-color: #e9c739;
 }
 @keyframes reveal {
   0% {
@@ -33758,3 +33763,29 @@ body.dark {
   background-color: rgba(0, 0, 0, 0.2);
 }
 /*# sourceMappingURL=style.css.map */
+
+.rain-maker {
+  display: block;
+  font-size: 3em;
+  padding: 0.5em 0.7em;
+  background-color: gold;
+  border: none;
+  font-weight: bold;
+  font-family: Helvetica;
+  
+  &:hover {
+    background-color: darken(gold, 5%);
+  }
+  &:active {
+    background-color: darken(gold, 10%);
+  }
+}
+
+.rain {
+  z-index: 1; /* Place the rain animation behind the button */
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
+  pointer-events: none; /* Allow clicks to pass through the canvas */
+}
