@@ -15381,6 +15381,10 @@ a.h-text-dark:hover {
   min-height: 60vh !important;
 }
 
+.min-vh-65 {
+  min-height: 65vh !important;
+}
+
 .vh-60 {
   height: 60vh !important;
 }
@@ -20115,7 +20119,7 @@ body:not(.has-plugin-html5video) .video-wrap video {
 @media (max-width: 576px) {
   #slider .container {
     /* height: auto !important;  */
-    height: 41% !important;
+    height: 38% !important;
   }
 
 }
