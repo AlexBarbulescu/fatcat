@@ -33813,3 +33813,9 @@ body.dark {
   background-size: cover; 
   z-index: 0;
 }
+
+.pink-svg {
+  /* filter: brightness(0) saturate(100%) invert(23%) sepia(97%) saturate(6498%) hue-rotate(329deg) brightness(98%) contrast(105%); */
+  /* filter: brightness(0) saturate(100%) invert(100%);  */
+  fill: #ff0159; /* Not all external SVGs support this */
+}
