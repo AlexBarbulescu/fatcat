@@ -20115,7 +20115,8 @@ body:not(.has-plugin-html5video) .video-wrap video {
 @media (max-width: 576px) {
   #slider .container {
     /* height: auto !important;  */
-    height: 38% !important;
+    /* height: 38% !important; */
+    height: 25% !important;
   }
 
 }
@@ -23020,6 +23021,10 @@ td.actions {
 .button.button-mustard {
   --cnvs-btn-color: #e9c739;
   color: var(--cnvs-btn-color-dark);
+}
+.button.button-darkbw {
+  background-color: var(--cnvs-btn-color-dark);
+  color: #fff;
 }
 .button:hover {
   background-color: var(--bs-black);
@@ -27119,6 +27124,7 @@ td.actions {
     margin: 40px 10px 50px 10px;
   }
   .features .content .item {
+    padding-top: 45px;
     width: calc(100% - 0px);
   }
   .features.apart .content {
